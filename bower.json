@@ -1,0 +1,21 @@
+{
+  "name": "P3",
+  "authors": [
+    "huzhongliang <huzl0525@163.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "knockout": "^3.4.2"
+  }
+}
