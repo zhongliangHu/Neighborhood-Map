@@ -15,9 +15,7 @@
 </header>
 <div class="container">
 	<div class="sidebar">
-		<div>
-			<input id="filter" type="text" data-bind="textInput:inputval, event:{keydown:inputChange,focus:showList,blur:hidelist}">
-		</div>
+	
 	</div>
 </div>
 
