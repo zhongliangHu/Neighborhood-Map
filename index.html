@@ -18,8 +18,20 @@
 		<div>
 			<input id="filter" type="text" data-bind="textInput:inputval, event:{keydown:inputChange,focus:showList,blur:hidelist}">
 		</div>
+		<ul data-bind="foreach:items">
+			<li data-bind="text: title, visible: visible, event:{mouseover:setLarge, mouseout:setNormal,click:$data.openWindow}"></li>
+		</ul>	
+	</div>
+	<div class="main">
+		<div class="map-top">
+			<span data-bind="event:{click:toggleside}"></span>
+		</div>
+		<div id="map"></div>
 	</div>
 </div>
+<div class="tips" data-bind="html:tips, visible:tips"></div>
+<script type= "text/javascript" src="js/app.js"></script>
+<script async type="text/javascript" src=""https://api.map.baidu.com/api?v=2.0&ak=QM4G5cNKILHICY17zFqOjhObygCtbSlh&callback=init""></script>
 
 <!-- <div data-bind="text:name"></div>
 <input type="text" data-bind="value:name"/>
@@ -29,9 +41,9 @@ function ViewModel() {
   this.id=88;
   this.name=ko.observable("Dufresne:THANK YOU~");
 };
-ko.applyBindings(new ViewModel()); -->
+ko.applyBindings(new ViewModel()); 
+</script>-->
 
 
-</script>
 </body>
 </html>
