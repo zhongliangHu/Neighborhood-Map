@@ -129,13 +129,52 @@ function loadData(items){
 			marker.visible = true;
 			marker.selected = false;
 			marker.stationInfo = curPosi.address;
-			marker.position = curPosi.
+			marker.position = curPosi.point;
+			marker.open = false;
+			
+			marker.addEventListener("click",marker.toggleWindow);
+			marker.addEventListener("mouseover",marker.showLabel);
+			marker.addEventListener("mouseout",marker.setNormal);
+			marker.addEventListener("infoWindowclose",marker.setWindowClose);
+			items.push(marker);
+			map.addOverlay(marker);	
 		}
 		
 	}
 }
 
+function showList(){
+	$(".sidebar ul").addClass("show");
+}
+function hideList(){
+	window.setTimeout(function(){
+		$(".show").toggleClass("show");
+	},100);
+}
+function inputChange(m){
+	window.clearTimeout(window.keypressTimer);
+	window.keypressTimer = window.setTimeout(function(){
+		var value = m.inputval();
+		var list = m.items().map(function(marker,index){
+			if (marker.title.match(value) ){
+				marker.visible = true;
+				marker.show();
+			}else{
+				marker.visible = false;
+				marker.hide();
+			}
+			return marker;	
+		});
+		m.items.removeAll();
+		m.items(list);
+	},500);
+	return true;
+}
 
+// google map api 权限检测
+function gm_authFailure(){
+	model.tips("google map 无权访问");
+}
 
 
 
