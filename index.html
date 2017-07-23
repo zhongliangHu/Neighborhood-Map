@@ -3,9 +3,10 @@
 <head>
    <meta charset="utf-8">
    <meta name = "viewport" content="width=device-width, initial-scale=1">
-   <!-- <link href = "css/style" rel = "stylesheet" > -->
+   <link href = "css/style.css" rel = "stylesheet" >
    <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
    <script type="text/javascript" src="js/lib/knockout/dist/knockout.js"></script>
+
    <title>Neighborhood Map</title>
 </head>
 
@@ -20,7 +21,7 @@
 		</div>
 		<ul data-bind="foreach:items">
 			<li data-bind="text: title, visible: visible, event:{mouseover:setLarge, mouseout:setNormal,click:$data.openWindow}"></li>
-		</ul>	
+		</ul>
 	</div>
 	<div class="main">
 		<div class="map-top">
@@ -41,7 +42,7 @@ function ViewModel() {
   this.id=88;
   this.name=ko.observable("Dufresne:THANK YOU~");
 };
-ko.applyBindings(new ViewModel()); 
+ko.applyBindings(new ViewModel());
 </script>-->
 
 
