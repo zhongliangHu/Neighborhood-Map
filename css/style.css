@@ -83,3 +83,28 @@ h2{
   background: url("img/button.svg") transparent no-repeat;    /*img/button.svg? ??*/
   cursor: pointer;
 }
+@media screen and (max-width: 500px){
+	.container .sidebar{
+		width: 100%;
+	}
+	.sidebar ul {
+		width: auto;
+		padding: 0 .5rem 0 .5rem;
+		position: absolute;
+		transform: translateX(-120%);
+		background-color: white;
+		z-index: 2;
+		color: black;
+		transition: transform 0.5s;
+	}
+	.sidebar ul.show{
+		transform: translateY(0);
+	}
+	.main{
+		margin-top: 1rem;
+		width: 100%;
+	}
+	.main .map-top{
+		display: none;
+	}
+}

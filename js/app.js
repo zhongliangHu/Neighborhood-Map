@@ -6,7 +6,7 @@ var model = {
 	items: ko.observableArray(),
 	infoWindow: undefined,
 	tips: ko.observable(""),
-}；
+};
 ko.applyBindings(model);
 
 //加载超时检测
@@ -58,7 +58,7 @@ function initMarker(proto){
 				this.setAnimation(BMAP_ANIMATION_BOUNCE);
 			}
 		}.bind(this),200);
-	}；
+	};
 	proto.showLabel=function(){
 		this.setTop(true);
 		this.setLabel(new BMap.Label(this.title,{offset:new BMap.Size(20,-10)}));
