@@ -94,7 +94,7 @@ function initMarker(proto){
 }
 
 function toggleside(){
-	$(".container").toggleClass)("side-hide");
+	$(".container").toggleClass("side-hide");
 }
 
 //实现bus stop 信息的查询 完成Marker的初始化
