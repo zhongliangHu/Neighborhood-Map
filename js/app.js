@@ -31,7 +31,7 @@ function init(){
 	},{enableHighAccuracy:true});
 	convert(new BMap.Point(120.1122183704376,30.284863403785405),function(data){
 		map.centerAndZoom(data.pionts[0],17);//初始化地图，设置中心点坐标和地图级别
-		map.setControl(new BMap.MapTypeControl()); //添加地图类型控件
+		map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
 		map.setCurrentCity("杭州"); //设置地图显示的城市 此项必须设置
 		map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
 	});
@@ -90,11 +90,11 @@ function initMarker(proto){
 	proto.setWindowClose=function(){
 		this.windowOpen=false;
 	};
-	
+
 }
 
 function toggleside(){
-	$(".container").toggleClass)("side-hide");
+	$(".container").toggleClass("side-hide");
 }
 
 //实现bus stop 信息的查询 完成Marker的初始化
@@ -121,9 +121,9 @@ function loadData(items){
 	function setMarker(results){
 		var curPosi;
 		for (var i=0; i<results.getCurrentNumPois(); i++){
-			// s.push(results.getPoi(i).title + ", " + results.getPoi(i).address); 
+			// s.push(results.getPoi(i).title + ", " + results.getPoi(i).address);
 			curPosi = results.getPoi(i);
-			
+
 			var marker = new BMap.Marker(curPosi.point);
 			marker.title = curPosi.title;
 			marker.visible = true;
@@ -131,15 +131,15 @@ function loadData(items){
 			marker.stationInfo = curPosi.address;
 			marker.position = curPosi.point;
 			marker.open = false;
-			
+
 			marker.addEventListener("click",marker.toggleWindow);
 			marker.addEventListener("mouseover",marker.showLabel);
 			marker.addEventListener("mouseout",marker.setNormal);
 			marker.addEventListener("infoWindowclose",marker.setWindowClose);
 			items.push(marker);
-			map.addOverlay(marker);	
+			map.addOverlay(marker);
 		}
-		
+
 	}
 }
 
@@ -163,7 +163,7 @@ function inputChange(m){
 				marker.visible = false;
 				marker.hide();
 			}
-			return marker;	
+			return marker;
 		});
 		m.items.removeAll();
 		m.items(list);
@@ -175,8 +175,3 @@ function inputChange(m){
 function gm_authFailure(){
 	model.tips("google map 无权访问");
 }
-
-
-
-
-
