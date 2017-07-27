@@ -57,7 +57,7 @@ function initMarker(proto){
 				this.showLabel();
 				this.setAnimation(BMAP_ANIMATION_BOUNCE);
 			}
-		}.bind(this),200);
+		}.bind(this),400);
 	};
 	proto.showLabel=function(){
 		this.setTop(true);
