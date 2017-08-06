@@ -22,6 +22,17 @@
     <div id="map"></div>
     <script>
       var map;
+      var markers = [];
+
+      var locations = [
+        { title: "myLatlng",
+          location: {lat: 30.245, lng: 120.162}
+        },{
+          title: "myLatlng2",
+          location: {lat: 30.255, lng: 120.162}
+        }
+      ];
+
       var myLatlng = {lat: 30.245, lng: 120.162};
       var myLatlng2 = {lat: 30.255, lng: 120.162};
       function initMap() {
@@ -40,6 +51,7 @@
           }
         });        //设置map地图样式
         //设置标记
+
         var marker = new google.maps.Marker({
           position:myLatlng,
           map:map,
@@ -75,6 +87,13 @@
             infoWindow.setContent("zoom:" + map.getZoom());
           },3000);
         });
+
+        //creat markers
+
+
+        //creat bounds
+        var bounds = new google.maps.LatLngBounds();
+
 
       }
 
