@@ -33,11 +33,13 @@
         }
       ];
 
-      var myLatlng = {lat: 30.245, lng: 120.162};
-      var myLatlng2 = {lat: 30.255, lng: 120.162};
+      // var myLatlng = {lat: 30.245, lng: 120.162};
+      // var myLatlng2 = {lat: 30.255, lng: 120.162};
+
       function initMap() {
+        //设置map地图样式
         map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatlng,
+          center: {lat: 30.245, lng: 120.162},
           zoom: 17,
           streetViewControl: true,
           rotateControl: true,
@@ -49,50 +51,84 @@
             style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
             //mapTypeIds: ["roadmap","terrain"]
           }
-        });        //设置map地图样式
-        //设置标记
-
-        var marker = new google.maps.Marker({
-          position:myLatlng,
-          map:map,
-          title:"Click to change zoom"
-        });
-        //设置信息窗口
-        var infoWindow = new google.maps.InfoWindow({
-          content: "zoom:" + map.getZoom(),
-          position: myLatlng
-        });
-
-        //traffic层
-        var transitLayer = new google.maps.TransitLayer();
-        transitLayer.setMap(map);
-
-        //点击标记改变map中心点和大小
-        marker.addListener("click",function(){
-          window.setTimeout(function(){
-            map.setZoom(19);
-            map.setCenter(myLatlng2);
-          },500);
-          infoWindow.open(map,marker);
-        });
-       //map中心改变后地图panTo 重设的标记点
-        map.addListener("center_changed",function(){
-          window.setTimeout(function(){
-            map.panTo(marker.setPosition(myLatlng2));
-          },3000);
-        });
-     //map的zoom改变后 信息窗口信息改变
-        map.addListener("zoom_changed",function(){
-          window.setTimeout(function(){
-            infoWindow.setContent("zoom:" + map.getZoom());
-          },3000);
         });
 
         //creat markers
+        locations.forEach(function(item,index,arr){
+          var marker = new google.maps.Marker({
+            position:item.location,
+            map:map,
+            title:item.title,
+            animation:google.maps.Animation.DROP
+          });
+          markers.push(marker);
 
+          marker.addListener("click",function(){
+            bounce(this);
+            infoWindow.open(map,marker);
+          });
+
+        });
+
+        //bounce animation
+        function bounce(marker){
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+          window.setTimeout(function(){
+            marker.setAnimation(null);   //2s后标记停止bounce
+          },2000)
+        };
 
         //creat bounds
-        var bounds = new google.maps.LatLngBounds();
+        function creatBounds(){
+          var bounds = new google.maps.LatLngBounds();
+          for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].position);
+          };
+          map.fitBounds(bounds);   //使地图viewport对所有bounds可见
+        };
+       creatBounds();
+       console.log(bounds);
+
+        //设置标记
+        // var marker = new google.maps.Marker({
+        //   position: myLatlng,
+        //   map:map,
+        //   title:"title",
+        //   animation:google.maps.Animation.DROP
+        // });
+
+        //设置信息窗口
+        // var infoWindow = new google.maps.InfoWindow({
+        //   content: "zoom:" + map.getZoom(),
+        //   position: myLatlng
+        // });
+
+        //traffic层
+        // var transitLayer = new google.maps.TransitLayer();
+        // transitLayer.setMap(map);
+
+        //点击标记改变map中心点和大小
+        // marker.addListener("click",function(){
+        //   window.setTimeout(function(){
+        //     map.setZoom(19);
+        //     map.setCenter(myLatlng2);
+        //   },500);
+        //   //infoWindow.open(map,marker);
+        // });
+
+       //map中心改变后地图panTo 重设的标记点
+        // map.addListener("center_changed",function(){
+        //   window.setTimeout(function(){
+        //     map.panTo(marker.setPosition(myLatlng2));
+        //   },3000);
+        // });
+     //map的zoom改变后 信息窗口信息改变
+        // map.addListener("zoom_changed",function(){
+        //   window.setTimeout(function(){
+        //     infoWindow.setContent("zoom:" + map.getZoom());
+        //   },3000);
+        // });
+
 
 
       }
