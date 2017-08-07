@@ -25,11 +25,14 @@
       var markers = [];
 
       var locations = [
-        { title: "myLatlng",
+        { title: "myLatlng1",
           location: {lat: 30.245, lng: 120.162}
         },{
           title: "myLatlng2",
-          location: {lat: 30.255, lng: 120.162}
+          location: {lat: 30.255, lng: 120.161}
+        },{
+          title: "myLatlng3",
+          location: {lat: 30.256, lng: 120.163}
         }
       ];
 
@@ -82,12 +85,13 @@
         function creatBounds(){
           var bounds = new google.maps.LatLngBounds();
           for (var i = 0; i < markers.length; i++) {
-            bounds.extend(markers[i].position);
+            bounds.extend(markers[i].position);   //合并markers.position至bounds--{f,b}
           };
           map.fitBounds(bounds);   //使地图viewport对所有bounds可见
+          console.log(bounds);
         };
        creatBounds();
-       console.log(bounds);
+
 
         //设置标记
         // var marker = new google.maps.Marker({
