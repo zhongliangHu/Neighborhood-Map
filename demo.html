@@ -29,10 +29,10 @@
           location: {lat: 30.245, lng: 120.162}
         },{
           title: "myLatlng2",
-          location: {lat: 30.255, lng: 120.161}
+          location: {lat: 30.256, lng: 120.161}
         },{
           title: "myLatlng3",
-          location: {lat: 30.256, lng: 120.163}
+          location: {lat: 30.247, lng: 120.161}
         }
       ];
 
@@ -81,11 +81,11 @@
           },2000)
         };
 
-        //creat bounds
+        //creat bounds 同时map会自动将视图范围包含所有markers
         function creatBounds(){
           var bounds = new google.maps.LatLngBounds();
           for (var i = 0; i < markers.length; i++) {
-            bounds.extend(markers[i].position);   //合并markers.position至bounds--{f,b}
+            bounds.extend(markers[i].position);   //extends this bounds to cotain the given point(https://developers.google.com/maps/documentation/javascript/reference?csw=1#LatLngBounds)合并markers.position至bounds--{f{f,d},b{f,d}}
           };
           map.fitBounds(bounds);   //使地图viewport对所有bounds可见
           console.log(bounds);
@@ -132,7 +132,6 @@
         //     infoWindow.setContent("zoom:" + map.getZoom());
         //   },3000);
         // });
-
 
 
       }
