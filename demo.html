@@ -11,7 +11,7 @@
         height: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
-      html, body {
+      html, body, .container {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -19,7 +19,34 @@
     </style>
   </head>
   <body>
-    <div id="map"></div>
+    <div class="container">
+      <div id="map"></div>
+        <form onsubmit="submitFn(this,event);"> <!-- submitFn 功能?? -->
+          <main class="search-wrapper">
+           <div class="input">
+             <input type="text" class="search-input" placeholder="搜索景点" data-bind="value:searchText, valueUpdate:'keyup'"/>
+             <button type="button" class="search-icon" onclick="searchToggle(this,event);"></button>
+
+           </div>
+           <section class="result_container">
+             <ul class="" role="menu" data-bind="foreach:locationName" >
+               <!-- bootstrap下拉菜单 -->
+               <li calss="start">
+                 <a href="#" data-bind="click:$parent.select" style="color:white;">
+                   <i class="icon-pointer"> </i>
+                   <span class="title" data-bind="text:title, click:$parent.select">
+
+                   </span>
+                 </a>
+               </li>
+             </ul>
+           </section>
+          </main>
+        </form>
+    </div>
+
+
+
     <script>
       var map;
       var markers = [];
