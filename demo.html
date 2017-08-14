@@ -12,7 +12,7 @@
         height: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
-      html, body, .container {
+      html, body, .container-fluid{
         height: 100%;
         margin: 0;
         padding: 0;
@@ -20,12 +20,12 @@
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div id="map"></div>
         <form onsubmit="submitFn(this,event);"> <!-- submitFn 功能?? -->
           <main class="search-wrapper">
            <div class="input">
-             <input type="text" class="search-input" placeholder="搜索景点" data-bind="value:searchText, valueUpdate:'keyup'"/>
+             <input type="text" class="input-search" placeholder="搜索景点" data-bind="value:searchText, valueUpdate:'keyup'"/>
              <button type="button" class="search-icon" onclick="searchToggle(this,event);"></button>
 
            </div>
