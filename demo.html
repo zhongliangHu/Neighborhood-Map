@@ -110,16 +110,28 @@
         };
 
         //creat bounds 同时map会自动将视图范围包含所有markers
-        function creatBounds(){
+       function creatBounds(){
           var bounds = new google.maps.LatLngBounds();
           for (var i = 0; i < markers.length; i++) {
             bounds.extend(markers[i].position);   //extends this bounds to cotain the given point(https://developers.google.com/maps/documentation/javascript/reference?csw=1#LatLngBounds)合并markers.position至bounds--{f{f,d},b{f,d}}
           };
           map.fitBounds(bounds);   //使地图viewport对所有bounds可见
           console.log(bounds);
-        };
+       };
        creatBounds();
 
+
+//ViewModel
+      var ViewModel = function () {
+        var self = this;
+        this.locationName=ko.observableArray(locations);
+        this.searchText=ko.observable("");
+        this.markerItem=ko.observableArray(markers);
+
+
+
+      };
+      ko.applyBindings(new ViewModel());
 
         //设置标记
         // var marker = new google.maps.Marker({
