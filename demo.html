@@ -24,11 +24,13 @@
       <div id="map"></div>
         <form onsubmit="submitFn(this,event);"> <!-- submitFn 功能?? -->
           <main class="search-wrapper">
-           <div class="input">
+           <div class="input-holder">
              <input type="text" class="input-search" placeholder="搜索景点" data-bind="value:searchText, valueUpdate:'keyup'"/>
              <button type="button" class="search-icon" onclick="searchToggle(this,event);"></button>
 
            </div>
+           <span class="close" onclick="searchToggle(this, event);" style="opacity:1.0"></span>
+           
            <section class="result_container">
              <ul class="" role="menu" data-bind="foreach:locationName" >
                <!-- bootstrap下拉菜单 -->
@@ -45,6 +47,31 @@
           </main>
         </form>
     </div>
+    <script type="text/javascript">
+        function searchToggle(obj,evt){
+          var container = $(obj).closest('.search-wrapper');
+          var result_container = $("result_container");
+          if(!container.hasClass(".active")){
+            container.addClass(".active");
+            result_container.css({
+              display: "block";
+            });
+            evt.preventDefault();
+          }else if (container.hasClass(".active") && $(obj).closest(".input-holder").length == 0) {
+            container.removeClass(".active");
+            container.find(".search-input").val("");
+            container.find("result_container").fadeOut(500,callback());
+            result_container.css({
+              display: 'none';
+            });
+          }
+        }
+        $(function callback(){
+          $('#map').height($(document.body).height());
+        })
+    </script>
+
+
 
 
 
