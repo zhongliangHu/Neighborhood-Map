@@ -19,6 +19,7 @@
       }
     </style>
   </head>
+
   <body>
     <div class="container-fluid">
       <div id="map"></div>
@@ -30,7 +31,7 @@
 
            </div>
            <span class="close" onclick="searchToggle(this, event);" style="opacity:1.0"></span>
-           
+
            <section class="result_container">
              <ul class="" role="menu" data-bind="foreach:locationName" >
                <!-- bootstrap下拉菜单 -->
@@ -47,6 +48,7 @@
           </main>
         </form>
     </div>
+
     <script type="text/javascript">
         function searchToggle(obj,evt){
           var container = $(obj).closest('.search-wrapper');
@@ -148,6 +150,38 @@
        creatBounds();
 
 
+       //加载百度地图天气API
+       markers.forEach(function(item){
+         var myurl = "https://api.map.baidu.com/telematics/v3/weather?location=" + item.position.lng() + "," + item.position.lat() + "&output=json&ak=b0L00kvB63P53tPEGaa9BGvypgCjV3D1";
+         $.ajax({
+           url: myurl,
+           dataType: 'jsonp',
+         })
+         .done(function(data){
+           if(data['results']){
+             var results = data['results'],
+                 current_weather = results[0]['weather_data'][0],
+                 imgURL = current_weather['dayPictureUrl'],
+                 weather = current_weather['weather'],
+                 temp = current_weather['temperature'];
+             item.extra = '<ul style =  "list-style:none;">';
+             item.extra += '<img src = ">'+ imgURL +'" alt="weatherImag"/>';
+             item.extra += '<li>Temperature：'+ temp + '</li>';
+             item.extra += '<li>Weather：'+ weather + '</li>';
+             item.extra += '</ul>';
+           }else {
+             item.extra = '';
+           }
+         })
+         .fail(function () {
+           alert('天气预报加载失败，请检查网络连接');
+         })
+         .always(function () {
+           console.log('complete');
+         });
+       });
+
+
 //ViewModel
       var ViewModel = function () {
         var self = this;
@@ -155,6 +189,28 @@
         this.searchText=ko.observable("");
         this.markerItem=ko.observableArray(markers);
 
+        this.search = function(value){
+          self.locationName([]);
+          for (var x in locations) {
+            if (locations[x].title.toLowerCase().indexOf(value.toLowerCase()) >=0){
+              self.locationName.push(locations(x));
+              markers[x].setVisible(true);
+            }else {
+              markers[x].setVisible(false);
+            };
+          }
+        };
+
+        this.searchText.subscribe(self.search);   //searchText绑定search
+
+        self.select = function () {
+          for (var i = 0; i < locations.length; i++) {
+            filter.push(locations[i].title);
+          }
+          current = filter.indexOf(this.title);
+          google.maps.event.trigger(markers[current],'click')
+
+        }
 
 
       };
