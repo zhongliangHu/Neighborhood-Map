@@ -2,8 +2,12 @@
 <html>
   <head>
     <title>Simple Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href = "css/style.css" rel = "stylesheet" >
+    <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/knockout/dist/knockout.js"></script>
+
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <style>
       /* Always set the map height explicitly to define the size of the div
@@ -82,14 +86,35 @@
       var markers = [];
 
       var locations = [
-        { title: "myLatlng1",
-          location: {lat: 30.245, lng: 120.162}
+        { title: "杭州西湖",
+          location: {lat: 30.2283669051, lng: 120.1347587344}
         },{
-          title: "myLatlng2",
-          location: {lat: 30.256, lng: 120.161}
+          title: "东阳横店影视城",
+          location: {lat: 29.1633936915, lng: 120.3699124044}
         },{
-          title: "myLatlng3",
-          location: {lat: 30.247, lng: 120.161}
+          title: "温州雁荡山",
+          location: {lat: 28.3893538678, lng: 121.0822165504}
+        },{
+          title: "嘉兴南湖",
+          location: {lat: 30.7607727677, lng: 120.7662067390}
+        },{
+          title: "钱塘江",
+          location: {lat: 30.2798502718, lng: 120.2540018992}
+        },{
+          title: "嘉兴乌镇",
+          location: {lat: 30.7554558841, lng: 120.4926867879}
+        },{
+          title: "西溪",
+          location: {lat: 30.2752091858, lng: 120.0742896566}
+        },{
+          title: "千岛湖",
+          location: {lat: 29.6018722016, lng: 119.0214595304}
+        },{
+          title: "湖州莫干山",
+          location: {lat: 30.6125304250, lng: 119.8750885031}
+        },{
+          title: "舟山普陀",
+          location: {lat: 29.9553159987, lng: 122.3092501811}
         }
       ];
 
