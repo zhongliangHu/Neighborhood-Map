@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link href = "css/style.css" rel = "stylesheet" >
-    <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="js/lib/knockout/dist/knockout.js"></script>
-
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <style>
       /* Always set the map height explicitly to define the size of the div
@@ -31,19 +28,17 @@
           <main class="search-wrapper">
            <div class="input-holder">
              <input type="text" class="input-search" placeholder="搜索景点" data-bind="value:searchText, valueUpdate:'keyup'"/>
-             <button type="button" class="search-icon" onclick="searchToggle(this,event);"></button>
+             <button type="button" class="search-icon" onclick="searchToggle(this,event);"><span></span></button>
 
            </div>
            <span class="close" onclick="searchToggle(this, event);" style="opacity:1.0"></span>
 
-           <section class="result_container">
+           <section class="result_container"> <!-- bootstrap下拉菜单 -->
              <ul class="" role="menu" data-bind="foreach:locationName" >
-               <!-- bootstrap下拉菜单 -->
                <li calss="start">
-                 <a href="#" data-bind="click:$parent.select" style="color:white;">
+                 <a href="#" data-bind="click:$parent.select" style="color:green;">
                    <i class="icon-pointer"> </i>
                    <span class="title" data-bind="text:title, click:$parent.select">
-
                    </span>
                  </a>
                </li>
@@ -53,6 +48,9 @@
         </form>
     </div>
 
+    <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/lib/knockout/dist/knockout.js"></script>
     <script type="text/javascript">
         function searchToggle(obj,evt){
           var container = $(obj).closest('.search-wrapper');
@@ -60,7 +58,7 @@
           if(!container.hasClass(".active")){
             container.addClass(".active");
             result_container.css({
-              display: "block";
+              display: "block"
             });
             evt.preventDefault();
           }else if (container.hasClass(".active") && $(obj).closest(".input-holder").length == 0) {
@@ -68,7 +66,7 @@
             container.find(".search-input").val("");
             container.find("result_container").fadeOut(500,callback());
             result_container.css({
-              display: 'none';
+              display: 'none'
             });
           }
         }
@@ -77,11 +75,7 @@
         })
     </script>
 
-
-
-
-
-    <script>
+   <script>
       var map;
       var markers = [];
 
@@ -95,17 +89,17 @@
           title: "温州雁荡山",
           location: {lat: 28.3893538678, lng: 121.0822165504}
         },{
-          title: "嘉兴南湖",
-          location: {lat: 30.7607727677, lng: 120.7662067390}
+          title: "宁波象山",
+          location: {lat: 29.4823746484, lng: 121.8758660893}
         },{
-          title: "钱塘江",
-          location: {lat: 30.2798502718, lng: 120.2540018992}
+          title: "兰溪诸葛八卦村",
+          location: {lat: 29.2544497752, lng: 119.3019070207}
         },{
           title: "嘉兴乌镇",
           location: {lat: 30.7554558841, lng: 120.4926867879}
         },{
-          title: "西溪",
-          location: {lat: 30.2752091858, lng: 120.0742896566}
+          title: "绍兴鲁迅故里",
+          location: {lat: 29.9987480649, lng: 120.5919337356}
         },{
           title: "千岛湖",
           location: {lat: 29.6018722016, lng: 119.0214595304}
@@ -124,8 +118,8 @@
       function initMap() {
         //设置map地图样式
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 30.245, lng: 120.162},
-          zoom: 17,
+          //center: {lat: 30.245, lng: 120.162},
+          //zoom: 17,
           streetViewControl: true,
           rotateControl: true,
           zoomControl: true,
@@ -139,6 +133,8 @@
         });
 
         //creat markers
+        var inFowindow= new google.maps.InfoWindow();
+
         locations.forEach(function(item,index,arr){
           var marker = new google.maps.Marker({
             position:item.location,
@@ -150,7 +146,7 @@
 
           marker.addListener("click",function(){
             bounce(this);
-            infoWindow.open(map,marker);
+            showInfoWindow(this,inFowindow);
           });
 
         });
@@ -170,14 +166,14 @@
             bounds.extend(markers[i].position);   //extends this bounds to cotain the given point(https://developers.google.com/maps/documentation/javascript/reference?csw=1#LatLngBounds)合并markers.position至bounds--{f{f,d},b{f,d}}
           };
           map.fitBounds(bounds);   //使地图viewport对所有bounds可见
-          console.log(bounds);
+          //console.log(bounds);
        };
        creatBounds();
 
 
        //加载百度地图天气API
        markers.forEach(function(item){
-         var myurl = "https://api.map.baidu.com/telematics/v3/weather?location=" + item.position.lng() + "," + item.position.lat() + "&output=json&ak=b0L00kvB63P53tPEGaa9BGvypgCjV3D1";
+         var myurl = "https://api.map.baidu.com/telematics/v3/weather?location=" + item.position.lng() + "," + item.position.lat() + "&output=json&ak=5knAwtLP2VvgPv7hZMs9aQtn";
          $.ajax({
            url: myurl,
            dataType: 'jsonp',
@@ -205,41 +201,15 @@
            console.log('complete');
          });
        });
-
-
-//ViewModel
-      var ViewModel = function () {
-        var self = this;
-        this.locationName=ko.observableArray(locations);
-        this.searchText=ko.observable("");
-        this.markerItem=ko.observableArray(markers);
-
-        this.search = function(value){
-          self.locationName([]);
-          for (var x in locations) {
-            if (locations[x].title.toLowerCase().indexOf(value.toLowerCase()) >=0){
-              self.locationName.push(locations(x));
-              markers[x].setVisible(true);
-            }else {
-              markers[x].setVisible(false);
-            };
-          }
-        };
-
-        this.searchText.subscribe(self.search);   //searchText绑定search
-
-        self.select = function () {
-          for (var i = 0; i < locations.length; i++) {
-            filter.push(locations[i].title);
-          }
-          current = filter.indexOf(this.title);
-          google.maps.event.trigger(markers[current],'click')
-
-        }
-
-
-      };
-      ko.applyBindings(new ViewModel());
+       //infowindow设置
+        function showInfoWindow(marker,infowindow) {
+         if(infowindow.marker != marker) {
+             infowindow.marker = marker;
+          infowindow.setContent ('<h3>' + marker.title + '</h3>' + marker.extra);
+          infowindow.open(map,marker);
+         }
+       }
+     };
 
         //设置标记
         // var marker = new google.maps.Marker({
@@ -281,14 +251,44 @@
         //   },3000);
         // });
 
+    //ViewModel
+    var filter = [];
+    var ViewModel = function () {
+      var self = this;
+      this.locationName=ko.observableArray(locations);
+      this.searchText=ko.observable("");
+      this.markerItem=ko.observableArray(markers);
 
+      this.search = function(value){
+        self.locationName([]);
+        for (var x in locations) {
+        if (locations[x].title.toLowerCase().indexOf(value.toLowerCase()) >=0){
+             self.locationName.push(locations(x));
+             markers[x].setVisible(true);
+        }else {
+            markers[x].setVisible(false);
+        };
+        }
+      };
+
+      this.searchText.subscribe(self.search);   //searchText绑定search
+
+      self.select = function () {
+           for (var i = 0; i < locations.length; i++) {
+                  filter.push(locations[i].title);
+           }
+           current = filter.indexOf(this.title);
+          google.maps.event.trigger(markers[current],'click')
       }
+    };
 
+    ko.applyBindings(new ViewModel());
     </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAImIIBU0qxkhLWU5Ema38mQVFjSUMSN4w&callback=initMap"
-    async defer></script>
-    <script src="bootstrap/js/bootstrap.min.js">
+    async defer>
     </script>
 
   </body>
+
 </html>
