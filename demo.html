@@ -42,14 +42,11 @@
         left: 50%;
       }
 
-      .search-wrapper.active{
-      }
-
       .search-wrapper .input-holder{
-        overflow: hidden;
+        overflow:hidden;
         height: 70px;
-        background: rgba(255, 255, 255, 0.7);
-        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
         position: relative;
         width: 500px;
         -ms-transition:all .5s ease-in-out; 	/* IE 9 */
@@ -61,7 +58,7 @@
 
       .search-wrapper.active .input-holder{
         border-radius: 10px;
-        width: 700px;
+        width: 800px;
         background: rgba(0, 0, 0, 0.8);
         -ms-transition:all .5s ease-in-out; 	/* IE 9 */
         -moz-transition:all .5s ease-in-out; 	/* Firefox */
@@ -71,13 +68,14 @@
       }
 
       .search-wrapper .input-holder .search-input{
-        width: 100%;
+        width: 80%;
         height: 50px;
-        padding: 0 70px 20px;
-        opacity: 0.2;
+        padding: 0px 0px 0px 0px;
+        opacity: 1;
+        background: transparent;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -50px;
+        left: 14px;
         -ms-box-sizing: border-box; 	/* IE 9 */
         -moz-transition: border-box; 	/* Firefox */
         -webkit-transition: border-box; /* Safari 和 Chrome */
@@ -86,13 +84,13 @@
         border: none;
         outline: none;
         font-family: "Open Sans",Arial,Verdana;
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 400;
-        line-height: 20px;
+        line-height: 30px;
         color: #FFF;
         -ms-transform: translate(0,60px); 	/* IE 9 */
         -moz-transform: translate(0,60px); 	/* Firefox */
-        -webkit-transform: translate(0,60px); /* Safari 和 Chrome */
+        -webkit-transform: translate(0,100px); /* Safari 和 Chrome */
         -o-transform: translate(0,60px); 	/* Opera */
         transform: translate(0,60px);
         -ms-transition:all .3s ease-in-out .3s; 	/* IE 9 */
@@ -105,16 +103,9 @@
         opacity: 1;
         -ms-transform: translate(0,10px); 	/* IE 9 */
         -moz-transform: translate(0,10px); 	/* Firefox */
-        -webkit-transform: translate(0,10px); /* Safari 和 Chrome */
+        -webkit-transform: translate(0,100px); /* Safari 和 Chrome */
         -o-transform: translate(0,10px); 	/* Opera */
-        transform: translate(0,10px);
-      }
-
-      .search-wrapper.active .input-holder .search-icon{
-        width: 50px;
-        height: 50px;
-        margin: 10px;
-        border-radius: 30px;
+        transform: translate(0,100px);
       }
 
       .search-wrapper .input-holder .search-icon{
@@ -134,6 +125,13 @@
         -webkit-transition:all .3s ease-in-out; /* Safari 和 Chrome */
         -o-transition:all .3s ease-in-out; 	/* Opera */
         transition:all .3s ease-in-out;
+      }
+
+      .search-wrapper.active .input-holder .search-icon{
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        border-radius: 30px;
       }
 
       .search-wrapper .input-holder .search-icon span{
@@ -157,7 +155,7 @@
         transform:rotate(-45deg);
       }
 
-      .search-wrapper .input-holder .search-icon span::before .search-wrapper .input-holder .search-icon::after{
+      .search-wrapper .input-holder .search-icon span::before, .search-wrapper .input-holder .search-icon::after{
 
       }
 
@@ -185,32 +183,30 @@
           position: absolute;
           z-index: 1;
           top: 24px;
-          right: 20px;
+          right: -45px;
           width: 25px;
           height: 25px;
           cursor: pointer;
-          -webkit-transform: rotate(-180deg);
-          -moz-transform: rotate(-180deg);
-          transform: rotate(-180deg);
-          -webkit-transition: all .3s cubic-bezier(0.285,-0.450,0.935,0.110);
-          -moz-transition: all .3s cubic-bezier(0.285,-0.450,0.935,0.110);
-          transition: all .3s cubic-bezier(0.285,-0.450,0.935,0.110);
-          -webkit-transition-delay: 0.2s;
-          -moz-transition-delay: 0.2s;
-          transition-delay: 0.2s;
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          transform: rotate(45deg);
+          -ms-transition:all .3s ease-in-out .2s; 	/* IE 9 */
+          -moz-transition:all .3s ease-in-out .2s; 	/* Firefox */
+          -webkit-transition:all .3s ease-in-out .2s; /* Safari 和 Chrome */
+          -o-transition:all .3s ease-in-out .2s; 	/* Opera */
+          transition:all .3s ease-in-out .2s;
       }
 
       .search-wrapper.active .close {
           right: -50px;
-          -webkit-transform: rotate(45deg);
-          -moz-transform: rotate(45deg);
+          -webkit-transform: rotate(0deg);
+          -moz-transform: rotate(0deg);
           transform: rotate(45deg);
-          -webkit-transition: all .6s cubic-bezier(0.000,0.105,0.035,1.570);
-          -moz-transition: all .6s cubic-bezier(0.000,0.105,0.035,1.570);
-          transition: all .6s cubic-bezier(0.000,0.105,0.035,1.570);
-          -webkit-transition-delay: 0.5s;
-          -moz-transition-delay: 0.5s;
-          transition-delay: 0.5s;
+          -ms-transition:all .3s ease-in-out .2s; 	/* IE 9 */
+          -moz-transition:all .3s ease-in-out .2s; 	/* Firefox */
+          -webkit-transition:all .3s ease-in-out .2s; /* Safari 和 Chrome */
+          -o-transition:all .3s ease-in-out .2s; 	/* Opera */
+          transition:all .3s ease-in-out .2s;
       }
 
       .search-wrapper .close::before,.search-wrapper .close::after {
@@ -241,9 +237,9 @@
           left: 0px;
           text-align: center;
           font-family: "Open Sans",Arial,Verdana;
-          font-size: 14px;
-          display: none;
-          color: #B7B7B7;
+          font-size: 20px;
+          display: block;
+          color: #fff;
       }
 
       @media screen and (max-width: 560px) {
@@ -285,18 +281,17 @@
           <main class="search-wrapper">
            <div class="input-holder">
              <input type="text" class="search-input" placeholder="搜索景点" data-bind="value:searchText, valueUpdate:'keyup'"/>
-             <button type="button" class="search-icon" onclick="searchToggle(this,event);"><span></span></button>
+             <button class="search-icon" onclick="searchToggle(this,event);"><span></span></button>
 
            </div>
            <span class="close" onclick="searchToggle(this, event);" style="opacity:1.0"></span>
 
-           <section class="result_container"> <!-- bootstrap下拉菜单 -->
+           <section class="result-container"> <!-- bootstrap下拉菜单 -->
              <ul class="" role="menu" data-bind="foreach:locationName" >
                <li calss="start">
-                 <a href="#" data-bind="click:$parent.select" style="color:green;">
-                   <i class="icon-pointer"> </i>
-                   <span class="title" data-bind="text:title, click:$parent.select">
-                   </span>
+                 <a href="#" data-bind="click:$parent.select">
+                   <i class="icon-pointer"></i>
+                   <span class="title" data-bind="text:title, click:$parent.select"></span>
                  </a>
                </li>
              </ul>
@@ -311,7 +306,7 @@
     <script type="text/javascript">
         function searchToggle(obj,evt){
           var container = $(obj).closest('.search-wrapper');
-          var result_container = $("result_container");
+          var result_container = $(".result-container");
           if(!container.hasClass(".active")){
             container.addClass(".active");
             result_container.css({
@@ -321,7 +316,7 @@
           }else if (container.hasClass(".active") && $(obj).closest(".input-holder").length == 0) {
             container.removeClass(".active");
             container.find(".search-input").val("");
-            container.find("result_container").fadeOut(500,callback());
+            container.find(".result-container").fadeOut(500,callback());
             result_container.css({
               display: 'none'
             });
