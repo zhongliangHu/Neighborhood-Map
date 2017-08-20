@@ -1,50 +1,48 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-   <meta charset="utf-8">
-   <meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-   <link href = "css/style.css" rel = "stylesheet" >
-   <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
-   <script type="text/javascript" src="js/lib/knockout/dist/knockout.js"></script>
+  <head>
+    <title>Simple Map</title>
+    <meta charset="utf-8">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href = "css/style.css" rel = "stylesheet" >
+  </head>
 
-   <title>Neighborhood Map</title>
-</head>
+  <body>
+    <div class="container-fluid">
+      <div id="map"></div>
+        <form onsubmit="submitFn(this,event);"> <!-- submitFn 功能?? -->
+          <main class="search-wrapper">
+           <div class="input-holder">
+             <input type="text" class="search-input" placeholder="搜索浙江十大景点"  data-bind="value:searchText, valueUpdate:'keyup'"/>
+             <button class="search-icon" onclick="searchToggle(this,event);"><span></span></button>
 
-<body>
-<header>
-	<h2>Neighborhood Map</h2>
-</header>
-<div class="container-fluid">
-	<div class="sidebar">
-		<div>
-			<input id="filter" type="text" data-bind="textInput:inputval, event:{keydown:inputChange,focus:showList,blur:hidelist}">
-		</div>
-		<ul data-bind="foreach:items">
-			<li data-bind="text: title, visible: visible, event:{mouseover:setLarge, mouseout:setNormal,click:$data.openWindow}"></li>
-		</ul>
-	</div>
-	<div class="main">
-		<div class="map-top">
-			<span data-bind="event:{click:toggleside}"></span>
-		</div>
-		<div id="map"></div>
-	</div>
-</div>
-<div class="tips" data-bind="html:tips, visible:tips"></div>
-<script type= "text/javascript" src="js/app.js"></script>
-<script async type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAImIIBU0qxkhLWU5Ema38mQVFjSUMSN4w&callback=initMap"></script>
+           </div>
+           <span class="close" onclick="searchToggle(this,event);" style="opacity:1.0"></span>
 
-<!-- <div data-bind="text:name"></div>
-<input type="text" data-bind="value:name"/>
+           <section class="result-container"> <!-- bootstrap下拉菜单 -->
+             <ul class="" role="menu" data-bind="foreach:locationName" >
+               <li calss="start">
+                 <a href="#" data-bind="click:$parent.select">
+                   <i class="icon-pointer"></i>
+                   <span class="title" data-bind="text:title, click:$parent.select" style="color:white;"></span>
+                 </a>
+               </li>
+             </ul>
+           </section>
+          </main>
+        </form>
+    </div>
 
-<script>
-function ViewModel() {
-  this.id=88;
-  this.name=ko.observable("Dufresne:THANK YOU~");
-};
-ko.applyBindings(new ViewModel());
-</script>-->
+    <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/lib/knockout/dist/knockout.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAImIIBU0qxkhLWU5Ema38mQVFjSUMSN4w&callback=initMap"
+    async defer>
+    </script>
 
-</body>
+  </body>
+
 </html>

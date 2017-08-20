@@ -1,110 +1,269 @@
-html,body{
-  width: 100%;
-  padding: 0;
-  margin: 0;
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+
+/* Optional: Makes the sample page fill the window. */
+html, body,#map{
+  height: 100%;
 }
-div.tips{
-  position: fixed;
-  top: 9%;
-  right: 5%;
-  font-size: 1.5rem;
-  background-color: lightyellow;
+body{
+ margin: 0;
+ padding: 0;
 }
-h2{
-  margin: 0;
-  line-height: 2.5rem;
+.container-fluid{
+  padding-left: 0;
+  padding-right: 0;
 }
-#map{
-  width: 100%;
-  height:calc(95vh - 2.5rem - 3rem);
-}
-.container{
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;     /*flex ??*/
-}
-.container div{
-  box-sizing: border-box;
-  transition: width .3s,
-              transform .3s;
-                                 /*transition ??*/
-}
-.container .sidebar input{
-  outline: none;
-  height: 2rem;
-  width: 90%;
-  font-size: 1.5rem;
-}
-.container ul{
+ul{
+  background: rgba(0, 0, 0, 0.2);
   list-style: none;
-  padding: 0 0 0 5px;
-  width: 90%;
-  height: calc(95vh - 2.5rem - 3rem);   /*calv( ) ??*/
-  overflow: auto;
+  border-radius: 10px;
+  padding-left: 0;
+  line-height: 30px;
 }
-.container li{
-  cursor: pointer;
-  margin-top: .5rem;
-  color: #3333333;
+li{
+  line-height: 35px;
 }
-.container li:hover{
-  color: #003300;
-}
-.sidebar{
-  width: 30%;
-  padding-left: 6px;
-  overflow: hidden;
-}
-.side-hide>.sidebar{
-  transform: translateX(-30vw);   /*transform vw? ??*/
-  width: 0;
-}
-.side-hide>.main{
-  width: calc(100% - 12px);
-  padding: 0 6px;
-}
-.main{
-  padding-right: 6px;
-  width: 70%;
-}
-.main .map-top{
-  position: relative;
-  height: 3rem;
-  width: 100%;
-}
-.main .map-top span{
+.search-wrapper{
   position: absolute;
-  left: 1rem;
-  top: 45%;
-  transform: translateY(-50%);
-  display: block;
-  width: 20px;
-  height: 14px;
-  background: url("img/button.svg") transparent no-repeat;    /*img/button.svg? ??*/
-  cursor: pointer;
+  -ms-transform:translate(-50%,-50%); 	/* IE 9 */
+  -moz-transform:translate(-50%,-50%); 	/* Firefox */
+  -webkit-transform:translate(-50%,-50%); /* Safari 和 Chrome */
+  -o-transform:translate(-50%,-50%); 	/* Opera */
+  transform: translate(-50%,-50%);
+  top: 20%;
+  left: 50%;
 }
-@media screen and (max-width: 500px){
-	.container .sidebar{
-		width: 100%;
-	}
-	.sidebar ul {
-		width: auto;
-		padding: 0 .5rem 0 .5rem;
-		position: absolute;
-		transform: translateX(-120%);
-		background-color: white;
-		z-index: 2;
-		color: black;
-		transition: transform 0.5s;
-	}
-	.sidebar ul.show{
-		transform: translateY(0);
-	}
-	.main{
-		margin-top: 1rem;
-		width: 100%;
-	}
-	.main .map-top{
-		display: none;
-	}
+
+.search-wrapper .input-holder{
+  overflow:hidden;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  position: relative;
+  width: 500px;
+  -ms-transition:all .5s ease-in-out; 	/* IE 9 */
+  -moz-transition:all .5s ease-in-out; 	/* Firefox */
+  -webkit-transition:all .5s ease-in-out; /* Safari 和 Chrome */
+  -o-transition:all .5s ease-in-out; 	/* Opera */
+  transition:all .5s ease-in-out;
+}
+
+.search-wrapper.active .input-holder{
+  border-radius: 10px;
+  width: 800px;
+  background: rgba(0, 0, 0, 0.8);
+  -ms-transition:all .5s ease-in-out; 	/* IE 9 */
+  -moz-transition:all .5s ease-in-out; 	/* Firefox */
+  -webkit-transition:all .5s ease-in-out; /* Safari 和 Chrome */
+  -o-transition:all .5s ease-in-out; 	/* Opera */
+  transition:all .5s ease-in-out;
+}
+
+.search-wrapper .input-holder .search-input{
+  width: 80%;
+  height: 50px;
+  padding: 0px 0px 0px 0px;
+  opacity: 1;
+  background: transparent;
+  position: absolute;
+  top: 0px;
+  left: 14px;
+  -ms-box-sizing: border-box; 	/* IE 9 */
+  -moz-transition: border-box; 	/* Firefox */
+  -webkit-transition: border-box; /* Safari 和 Chrome */
+  -o-transition: border-box; 	/* Opera */
+  transition: border-box;
+  border: none;
+  outline: none;
+  font-family: "Open Sans",Arial,Verdana;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  color: #FFF;
+  -ms-transform: translate(0,10px); 	/* IE 9 */
+  -moz-transform: translate(0,10px); 	/* Firefox */
+  -webkit-transform: translate(0,10px); /* Safari 和 Chrome */
+  -o-transform: translate(0,10px); 	/* Opera */
+  transform: translate(0,10px);
+  -ms-transition:all .3s ease-in-out .3s; 	/* IE 9 */
+  -moz-transition:all .3s ease-in-out .3s; 	/* Firefox */
+  -webkit-transition:all .3s ease-in-out .3s; /* Safari 和 Chrome */
+  -o-transition:all .3s ease-in-out .3s; 	/* Opera */
+  transition:all .3s ease-in-out .3s;
+}
+.search-wrapper.active .input-holder .search-input{
+  opacity: 1;
+  -ms-transform: translate(0,20px); 	/* IE 9 */
+  -moz-transform: translate(0,20px); 	/* Firefox */
+  -webkit-transform: translate(0,20px); /* Safari 和 Chrome */
+  -o-transform: translate(0,20px); 	/* Opera */
+  transform: translate(0,20px);
+}
+
+.search-wrapper .input-holder .search-icon{
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 6px;
+  background: #fff;
+  padding: 0;
+  outline: none;
+  position: relative;
+  z-index: 2;
+  float: right;
+  cursor: pointer;
+  -ms-transition:all .3s ease-in-out; 	/* IE 9 */
+  -moz-transition:all .3s ease-in-out; 	/* Firefox */
+  -webkit-transition:all .3s ease-in-out; /* Safari 和 Chrome */
+  -o-transition:all .3s ease-in-out; 	/* Opera */
+  transition:all .3s ease-in-out;
+}
+
+.search-wrapper.active .input-holder .search-icon{
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 30px;
+}
+
+.search-wrapper .input-holder .search-icon span{
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  -ms-transform:rotate(45deg); 	/* IE 9 */
+  -moz-transform:rotate(45deg); 	/* Firefox */
+  -webkit-transform:rotate(-45deg); /* Safari 和 Chrome */
+  -o-transform:rotate(45deg); 	/* Opera */
+  transform:rotate(-45deg);
+  -ms-transition:all .3s ease-in-out; 	/* IE 9 */
+  -moz-transition:all .3s ease-in-out; 	/* Firefox */
+  -webkit-transition:all .3s ease-in-out; /* Safari 和 Chrome */
+  -o-transition:all .3s ease-in-out; 	/* Opera */
+  transition:all .3s ease-in-out;
+}
+
+.search-wrapper.active .input-holder .search-icon span{
+  -ms-transform:rotate(-45deg); 	/* IE 9 */
+  -moz-transform:rotate(-45deg); 	/* Firefox */
+  -webkit-transform:rotate(-90deg); /* Safari 和 Chrome */
+  -o-transform:rotate(-45deg); 	/* Opera */
+  transform:rotate(-90deg);
+}
+
+.search-wrapper .input-holder .search-icon span::before,.search-wrapper .input-holder .search-icon span::after{
+  position: absolute;
+  content: '';
+}
+
+.search-wrapper .input-holder .search-icon span::before{
+  width: 5px;
+  height: 12px;
+  left: 7px;
+  top: 23px;
+  border-radius: 4px;
+  background: #974BE0;
+}
+.search-wrapper .input-holder .search-icon span::after {
+    width: 20px;
+    height: 20px;
+    left: -3px;
+    top: -5px;
+    border-radius: 15px;
+    border: 4px solid #974BE0;
+}
+
+
+
+
+.search-wrapper .close {
+    position: absolute;
+    z-index: 1;
+    top: 24px;
+    right: -45px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -ms-transition:all .3s ease-in-out .2s; 	/* IE 9 */
+    -moz-transition:all .3s ease-in-out .2s; 	/* Firefox */
+    -webkit-transition:all .3s ease-in-out .2s; /* Safari 和 Chrome */
+    -o-transition:all .3s ease-in-out .2s; 	/* Opera */
+    transition:all .3s ease-in-out .2s;
+}
+
+.search-wrapper.active .close {
+    right: -50px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -ms-transition:all .3s ease-in-out .2s; 	/* IE 9 */
+    -moz-transition:all .3s ease-in-out .2s; 	/* Firefox */
+    -webkit-transition:all .3s ease-in-out .2s; /* Safari 和 Chrome */
+    -o-transition:all .3s ease-in-out .2s; 	/* Opera */
+    transition:all .3s ease-in-out .2s;
+}
+
+.search-wrapper .close::before,.search-wrapper .close::after {
+    position: absolute;
+    content: '';
+    background: grey;
+    border-radius: 2px;
+}
+
+.search-wrapper .close::before {
+    width: 5px;
+    height: 25px;
+    left: 10px;
+    top: 0px;
+}
+
+.search-wrapper .close::after {
+    width: 25px;
+    height: 5px;
+    left: 0px;
+    top: 10px;
+}
+
+.search-wrapper .result-container {
+    width: 105%;
+    position: absolute;
+    top: 80px;
+    left: -25px;
+    text-align: center;
+    font-family: "Open Sans",Arial,Verdana;
+    font-size: 18px;
+    display: block;
+    color: #FFF;
+}
+
+@media screen and (max-width: 560px) {
+    .search-wrapper.active .input-holder {
+        width:200px;
+    }
+}
+
+::-webkit-input-placeholder {
+    color: #ddd;
+}
+
+:-moz-placeholder {
+    color: #ddd;
+    opacity: 1;
+}
+
+::-moz-placeholder {
+    color: #ddd;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #ddd;
+}
+
+::-ms-input-placeholder {
+    color: #ddd;
 }

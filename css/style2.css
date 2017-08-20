@@ -1,0 +1,110 @@
+html,body{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+div.tips{
+  position: fixed;
+  top: 9%;
+  right: 5%;
+  font-size: 1.5rem;
+  background-color: lightyellow;
+}
+h2{
+  margin: 0;
+  line-height: 2.5rem;
+}
+#map{
+  width: 100%;
+  height:calc(95vh - 2.5rem - 3rem);
+}
+.container{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;     /*flex ??*/
+}
+.container div{
+  box-sizing: border-box;
+  transition: width .3s,
+              transform .3s;
+                                 /*transition ??*/
+}
+.container .sidebar input{
+  outline: none;
+  height: 2rem;
+  width: 90%;
+  font-size: 1.5rem;
+}
+.container ul{
+  list-style: none;
+  padding: 0 0 0 5px;
+  width: 90%;
+  height: calc(95vh - 2.5rem - 3rem);   /*calv( ) ??*/
+  overflow: auto;
+}
+.container li{
+  cursor: pointer;
+  margin-top: .5rem;
+  color: #3333333;
+}
+.container li:hover{
+  color: #003300;
+}
+.sidebar{
+  width: 30%;
+  padding-left: 6px;
+  overflow: hidden;
+}
+.side-hide>.sidebar{
+  transform: translateX(-30vw);   /*transform vw? ??*/
+  width: 0;
+}
+.side-hide>.main{
+  width: calc(100% - 12px);
+  padding: 0 6px;
+}
+.main{
+  padding-right: 6px;
+  width: 70%;
+}
+.main .map-top{
+  position: relative;
+  height: 3rem;
+  width: 100%;
+}
+.main .map-top span{
+  position: absolute;
+  left: 1rem;
+  top: 45%;
+  transform: translateY(-50%);
+  display: block;
+  width: 20px;
+  height: 14px;
+  background: url("img/button.svg") transparent no-repeat;    /*img/button.svg? ??*/
+  cursor: pointer;
+}
+@media screen and (max-width: 500px){
+	.container .sidebar{
+		width: 100%;
+	}
+	.sidebar ul {
+		width: auto;
+		padding: 0 .5rem 0 .5rem;
+		position: absolute;
+		transform: translateX(-120%);
+		background-color: white;
+		z-index: 2;
+		color: black;
+		transition: transform 0.5s;
+	}
+	.sidebar ul.show{
+		transform: translateY(0);
+	}
+	.main{
+		margin-top: 1rem;
+		width: 100%;
+	}
+	.main .map-top{
+		display: none;
+	}
+}
