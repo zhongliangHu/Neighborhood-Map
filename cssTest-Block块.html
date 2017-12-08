@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>"cssTest-Block块"</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <style>
+
+    body{
+      margin: 0px; padding: 0;
+    }
+
+    .flow-box{
+      display: inline-block;  background: #eee; width: 500px;  top: 10px; resize: both;
+    }
+    img{
+      float: left; width: 120px; height: 120px;
+    }
+    .flow-content{
+      margin-left: 150px; background: #beceeb;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="flow-box">
+    <img src="img/element-size.png" style="">
+    <div class="flow-content">somethingssomethingssomethini很重要，也就是，虽然不与浮动交集，自动退避浮动元素宽度的距离，但，本身作为普通元素的流动性依然存在，反映在布局上就是自动填满除</div>
+  </div>
+
+<!-- 1). 如果 'direction' 是 'ltr'，包含块的顶、左边是祖先元素生成的第一个框的顶、左内边距边界(padding edges) ，右、下边是祖先元素生成的最后一个框的右、下内边距边界(padding edges) -->
+  <p style="border:1px solid red; width:200px; padding:20px;">
+      T
+      <span style="background-color:#C0C0C0; position:relative;">
+              这段文字从左向右排列，红 XX 和 蓝 XX 和黄 XX 都是绝对定位元素，它的包含块是相对定位的SPAN。 可以通过它们绝对定位的位置来判断它们包含块的边缘。
+              <em style="position:absolute; color:red; top:0; left:0;">XX</em>
+              <em style="position:absolute; color:yellow; top:20px; left:0;">XX</em>
+              <em style="position:absolute; color:blue; bottom:0; right:0;">XX</em>
+      </span>
+  </p>
+
+  <p style="border:1px solid red; width:200px; padding:20px;">
+      T
+      <span style="background-color:#C0C0C0; ">
+              这段文字从左向右排列，红 XX 和 蓝 XX 和黄 XX 都是绝对定位元素，它的包含块是相对定位的SPAN。 可以通过它们绝对定位的位置来判断它们包含块的边缘。
+              <em style="position:absolute; color:red; top:0; left:0;">XX</em>
+              <em style="position:absolute; color:yellow; top:20px; left:0;">XX</em>
+              <em style="position:absolute; color:blue; bottom:0; right:0;">XX</em>
+      </span>
+  </p>
+
+    <!-- 边界无法围成一个区域，在这种情况下，包含块的宽度是负的 -->
+    <p style="border:1px solid red; width:200px; padding:20px;">
+        TEXT TEXT TEXT
+        <span style="background-color:#C0C0C0; position:relative;">
+            这段文字从左向右排列，红 XX 和 蓝 XX 和黄 XX 都是绝对定位元素，它的包含块是相对定位的SPAN。 可以通过它们绝对定位的位置来判断它们包含块的边缘。
+            <em style="position:absolute; color:red; top:0; left:0;">XX</em>
+            <em style="position:absolute; color:yellow; top:20px; left:0;">XX</em>
+            <em style="position:absolute; color:blue; bottom:0; right:0;">XX</em>
+        </span>
+    </p>
+<!-- 2）.如果 'direction' 是 'rtl'，包含块的顶、右边是祖先元素生成的第一个框的顶、右内边距边界 (padding edges) ，左、下边是祖先元素生成的最后一个框的左、下内边距边界 (padding edges)  -->
+      <p style="border:1px solid red; width:200px; padding:20px; direction:rtl;">
+    T
+    <span style="background-color:#C0C0C0; position:relative;">
+         这段文字从右向左排列，红 XX 和 蓝 XX 和黄 XX 都是绝对定位元素，它的包含块是相对定位的SPAN。可以通过它们绝对定位的位置来判断它们……
+        <em style="position:absolute; color:red; top:0; left:0;">XX</em>
+        <em style="position:absolute; color:yellow; top:20px; left:0;">XX</em>
+        <em style="position:absolute; color:blue; bottom:0; right:0;">XX</em>
+    </span>
+</p>
+
+
+
+  <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
+  <script>
+
+  </script>
+
+</body>
+</html>

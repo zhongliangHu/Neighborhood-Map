@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>"cssTest-水平居中"</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <style>
+
+    body{
+      height: 1200px;
+
+    }
+    .container{
+      width: 800px; height:350px;
+      position: relative;
+      margin: auto;
+      background: #eee;
+    }
+
+    .dialog{
+      width: 300px; height: 200px; border:5px solid #ddd; border-radius: 5px/5px; box-shadow: 10px -10px 5px #888888 inset;
+    }
+    .btn{
+      display: block;
+      margin: 150px auto;
+    }
+/* 绝对定位的元素-水平居中 负外边距法Negative Margins */
+    .dialog_absolute{
+     border:1px solid #ddd; border-radius: 5px/5px; box-shadow: 10px 10px 5px #888888;
+
+     position: absolute;
+     margin-left: -150px;
+     left:50%;
+     margin-right: auto;margin-top: auto;margin-bottom: auto;
+     top:auto; right: auto; bottom: auto;
+    }
+
+  /* 浮动元素-水平居中 负外边距法Negative Margins  */
+        .floatElement{
+          height: 150px; width: 100px;
+          float: left;
+
+          position:absolute;
+          margin-left: -50px;
+          left:50%;
+
+          top:0; right: auto; bottom: auto;
+          z-index: 99;
+
+          background: #777;
+         }
+
+
+  /* 绝对定位的元素-水平居中   margin-auto绝对居中法absolute centering */
+             .absolute-center.center-horizontally {
+              height: 300px; width: 200px;
+
+              position:absolute;
+              margin:auto;
+              right:0; left: 0px;
+              top:auto ; bottom: auto;
+              background: #eee;
+             }
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <div class = "container">
+    <div id = "dialog" class="dialog">
+      <input type="button" id="btn" class="btn" value="点击弹框">
+    </div>
+  </div>
+  <div class="floatElement">float element float element float element</div>
+  <div class="absolute-center center-horizontally">absolute-center center-horizontally</div>
+
+
+  <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
+  <script>
+    $("#btn").on("click",function(){
+      $("#dialog").toggleClass("dialog_absolute");
+    });
+
+  //正则表达RegExp
+    // var name = '"a", 2"b"';
+    // reg = name.match(/"([^"]*)"/g);
+    // newName=name.replace(/"([^"]*)"/g, "$1,$1");
+    // alert (reg);
+    // alert (newName);
+    name = 'aaa bbb ccc';
+    reg = name.match(/\b\w+\b/g);
+    uw=name.replace(/\b\w+\b/g, function(word){
+      return word.substring(0,1).toUpperCase()+word.substring(1);}
+    );
+    alert(reg);
+    alert(uw);
+  </script>
+
+</body>
+</html>

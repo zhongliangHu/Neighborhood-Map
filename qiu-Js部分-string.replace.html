@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>js</title>
+    <meta charset="utf-8">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
+  </head>
+  <body>
+  <div>
+    <p id = "result">输出结果</p>
+  </div>
+
+  <ul id="testUL">
+    <li> index = 0</li>
+    <li> index = 1</li>
+    <li> index = 2</li>
+    <li> index = 3</li>
+  </ul>
+
+
+  <script type="text/javascript">
+
+    // define
+(function (window) {
+    function fn(str) {
+        this.str = str;
+    }
+
+    fn.prototype.format = function () {
+        var arg = Array.prototype.slice.call(arguments,0);        //不会---
+        return this.str.replace( /\{(\d+)\}/g, function (a, b) {
+            return arg[b] || '';
+        });
+    };
+
+    window.fn = fn;
+})(window);
+
+// use
+(function () {
+    var t = new fn('<p><a href="{0}">{1}</a><span>{2}</span></p>');
+    var reg = t.str.match(/\{\s*(\d+)\s*\}/g);
+    var tFormat = t.format('http://www.alibaba.com', 'Alibaba', 'Welcome')
+    alert(reg);
+    alert(tFormat);
+    document.write(tFormat);
+})();
+
+
+  </script>
+
+  </body>
+
+</html>

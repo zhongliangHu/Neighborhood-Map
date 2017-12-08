@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>"cssTest-垂直居中"</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <style>
+    html{
+      overflow-y: scroll;
+    }
+    body{
+      height: 1200px;
+
+    }
+    .container{
+      width: 800px; height:350px;
+      position: relative;
+      margin: auto;
+      background: #eee;
+    }
+
+    .dialog{
+      width: 300px; height: 300px; border:5px solid #ddd; border-radius: 5px/5px; box-shadow: 10px -10px 5px #888888 inset;
+    }
+
+/* 绝对居中定位 */
+    .dialog_absolute{
+     border:1px solid #ddd; border-radius: 5px/5px; box-shadow: 10px 10px 5px #888888;
+     margin: auto;
+     position: absolute;
+     top:0;right:0;left: 0;bottom: 0;
+    }
+    .btn{
+      display: block;
+      margin: 150px auto;
+    }
+     /* 视区内 绝对居中定位, Within Viewport */
+        .absolute-center.is-fixed{
+          height: 100px; width: 100px;
+
+          position:fixed;
+          margin:auto;
+          top:0;right:0;left: 0;bottom: 0;
+          z-index: 99;
+
+          background: #666;
+         }
+
+      /* 边栏Offsets 绝对居中定位, Within Viewport */
+              .offsets, .is-left {
+              height: 300px; width: 100px;
+
+              position:absolute;
+              margin:auto;
+              top:0; bottom: 0; right:auto; left: 10px;
+
+              background: #222;
+             }
+
+              .offsets.is-top {
+               height: 100px; width: 500px;
+               position:fixed;
+               margin:auto;
+               left:0; right:0; bottom: auto;top:10px;
+
+              }
+              .is-right-top{
+                height: 100px; width: 100px;
+                position:fixed;
+                margin:auto;
+                left:auto; right:10px;  bottom: auto;top:10px;
+              }
+
+/* transforms居中定位,支持联合可变高度方式使用 */
+   .transformMethod{
+     width:50%;
+     height: 50%;
+     /*margin: auto;*/
+     position: absolute;
+     transform: translate(-50%,-50%);
+     top:50%; left:50%;
+     background: #aaa;
+     opacity: 0.5;
+   }
+    /* 视区内居中定位, Within Viewport */
+        .absolute-center , .is-fixed{
+            height: 100px; width: 100px;
+            position:fixed;
+            /* transform: translate(-50%,-50%);
+            top:50%; left:50%;*/
+            z-index: 99;
+            background: #666;
+        }
+
+  </style>
+</head>
+<body>
+
+  <div class = "container">
+    <div id = "dialog" class="dialog">
+      <input type="button" id="btn" class="btn" value="点击弹框">
+    </div>
+  </div>
+  <div class="transformMethod"></div>
+  <div class="absolute-center is-fixed"></div>
+  <div class="offsets is-left"></div>
+  <div class="offsets is-top"></div>
+  <div class="offsets is-right-top"></div>
+
+  <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
+  <script>
+    $("#btn").on("click",function(){
+      $("#dialog").toggleClass("dialog_absolute");
+    });
+  </script>
+
+</body>
+</html>

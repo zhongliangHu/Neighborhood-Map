@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>浙江十大景点</title>
+    <meta charset="utf-8">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href = "css/style.css" rel = "stylesheet" >
+  </head>
+
+  <body>
+
+    <script >
+    var name = "The Window";
+
+    function object(){
+      var name ="My object";
+      //var getNameFunc = function(){
+      getNameFunc = function(){
+        return function(){
+          return this.name;
+        };
+      };
+    }
+    object();                //实例化 才能调用getNameFunc
+    alert(getNameFunc()());     //==>the window     //如果 var getNameFunc=fn();那就变局部内的函数，不能被调用
+
+    var object2 = function (){
+      var name ="My object";
+      //that = this;   alert(object2()()()) 结果是the window
+      return getNameFunc2 = function(){
+        //var that = this;  alert(object2()()()) 结果是the window
+        return function(){
+          var that = this;  //alert(object2()()()) 结果是the window
+          return that.name;
+        };
+      };
+    }
+    //object2();
+    alert(object2()()());   //==>the window
+
+    var object3 = function (){
+      var name ="My object";
+      return getNameFunc3 = function(){
+        return function(){
+          return name;
+        };
+      };
+    }
+    alert(object3()()());      // ==>My object
+    //object3();
+    //alert(getNameFunc3()());  // ==>My object
+
+//函数this 与 闭包的理解
+    var object3 = function (){
+      var name ="My object";
+      getNameFunc3 = function(){
+        //return function(){
+          return name;
+      //  };
+      };
+    }
+    object3();
+    //alert(object3()()());
+    alert(getNameFunc3());  // ==>My object
+
+    var object = {
+ 　　　　name : "My Object",
+ 　　　　getNameFunc : function(){
+ 　　　　　　return function(){
+ 　　　　　　　　return name;
+ 　　　　　　};
+ 　　　　}
+ 　　};
+ 　　alert(object.getNameFunc()());  //==>the window
+
+    var object = {
+　　　　name : "My Object",
+　　　　getNameFunc : function(){
+　　　　　　var name = "My private Object";
+　　　　　　return function(){
+　　　　　　　　return name;
+　　　　　　};
+　　　　}
+　　};
+　　alert(object.getNameFunc()());  //==>My private Object
+
+//闭包的理解
+　　var object = {
+　　　　name : "My Object",
+　　　　getNameFunc : function(){
+　　　　　　return function(){
+　　　　　　　　return this.name;
+　　　　　　};
+　　　　}
+　　};
+　　alert(object.getNameFunc()());    // ==>the window
+
+   var object = {
+　　　　name : "My Object",
+　　　　getNameFunc : function(){
+　　　　　　var that = this;
+　　　　　　return function(){
+　　　　　　　　return that.name;
+　　　　　　};
+　　　　}
+　　};
+　　alert(object.getNameFunc()());    // ==>My object
+
+
+    var a="public";
+    function fn(){
+      var a = "private";
+      var that = this;
+      //return that.a
+      return a
+    }
+    alert(fn());             // ==>private
+//
+    var a = "public";
+    var ob={
+       a:"private",
+       fn: function fn(){
+           //var that = this;
+           //return that.a
+           return a
+         }
+    };
+    alert(ob.fn());       // ==>public
+
+    </script>
+
+  </body>
+
+</html>

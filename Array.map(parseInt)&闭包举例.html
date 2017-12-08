@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>map(parseInt)&闭包</title>
+    <meta charset="utf-8">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
+  </head>
+  <body>
+  <div>
+    <p id = "result">输出结果</p>
+  </div>
+
+  <ul id="testUL">
+    <li> index = 0</li>
+    <li> index = 1</li>
+    <li> index = 2</li>
+    <li> index = 3</li>
+  </ul>
+
+
+  <script type="text/javascript">
+    // var counter = 0;
+    document.getElementById("result").innerHTML = add();
+    var counter = 0;    //  ==> NaN
+      function add(){
+        function plus (){
+          counter += 1;
+        }
+        plus();
+        return counter;
+      }
+
+
+
+    var ul=document.getElementById("testUL");
+    var nodes = ul.getElementsByTagName("li");
+
+    // for (var i = 0; i < nodes.length; i++) {
+    //   $("#testUL").on("click",$("li")[i],function(i){
+    //     alert(i+1);
+    //   }(i));
+    // }
+    //
+
+    // var nodes = document.getElementsByTagName("li");
+    //  for(i = 0;i<nodes.length;i+= 1){
+    //      nodes[i].onclick = function(){
+    //          return function(){
+    //              alert(i+1);
+    //          }
+    //      }(i);
+    //  }          //==>输出 5
+
+    // var nodes = document.getElementsByTagName("li");
+    //      // var helper = function(i){
+    //      //     return function(e){
+    //      //         alert(i);
+    //      //     };
+    //      // };
+    //
+    //      var i;
+    //      for(i = 0;i<nodes.length;i+= 1){
+    //          nodes[i].onclick = function(i){
+    //              return function(){
+    //                  alert(i);
+    //              };
+    //          };
+    //      }       //程序没有反应 ？？
+
+       var nodes = document.getElementsByTagName("li");
+            var helper = function(i){
+                return function(){
+                    alert(i);
+                };
+            };
+
+            for(i = 0;i<nodes.length;i+= 1){
+                nodes[i].onclick = function(i){ //如果没有匿名function没有(i)的话，没有i值传递，i值仍然为4  ???
+                    return function(){
+                        alert(i);
+                    };
+                }(i);
+            }
+
+
+
+    //  var add_the_handlers = function(nodes){
+    //     var helper = function(i){
+    //         return function(e){
+    //             alert(i);
+    //         };
+    //     };
+    //
+    //     var i;
+    //     for(i = 0;i<nodes.length;i+= 1){
+    //         nodes[i].onclick = helper(i);
+    //     }
+    // };
+    // add_the_handlers(document.getElementsByTagName("li"));
+
+  </script>
+    <script >
+      // var a = ["1","2","3", "4","5",6,7,8,9,10,11,12,13,14,15];
+      //
+      // window.onload=function(){
+      //     document.open();
+      //     document.write(a.map(parseInt));
+      //     document.close();
+      // }  //文档加载结束后调用write(),重写整个文档
+      //
+      // document.write("<br/>"+"<strong>"+a+"</strong>");
+      // //document.write()直接嵌入到HTML主体代码中，直接向页面输出内容，它将不会调用document.open()
+      //
+      // window.onload=function(){
+      //   var element=document.getElementById("result");
+      //   element.innerHTML = "<br/>"+"<em>"+a+"</em>";
+      // }
+      //
+
+
+    </script>
+
+  </body>
+
+</html>
