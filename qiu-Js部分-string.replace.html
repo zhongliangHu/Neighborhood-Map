@@ -50,7 +50,29 @@
 
 
   </script>
+<script>
+  var startTime = +new Date;
+  var count = 0;
+  // var handle = setInterval(function() {
+  //   console.log('hello world'+count);
+  //   count++;
+  //   if(count === 1000) clearInterval(handle);
+  // }, 10);
+  var handle = setTimeout(function(){
+      console.log("hello"+count);
+      count++;
+  },100);
 
+  var handle2 = setInterval(function() {
+    console.log('hello world'+count);
+    count++;
+    if(count === 10) clearInterval(handle2);
+  }, 10);
+
+  while(+new Date - startTime < 10 * 1000) {};
+
+
+</script>
   </body>
 
 </html>

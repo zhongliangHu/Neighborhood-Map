@@ -6,37 +6,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
   <style>
-   body{
+   body,h1{
      padding: 0; margin: 0
    }
    html,body{
      height: 100%;   /*默认body高度为0，所以需要设置高度为100%*/
    }
+   h1{
+     text-align: center;
+   }
    .top{
-     width:50%; height: 50%; background-color: red;
+     width:50%; height: 50%; background-color:rgba(132,181,187,0.8) ;
      margin: 0 auto;
    }
-   .bottom{
-     width: 100%; height: 50%;
-     /*display:inline-block;*/
+   .top:after{
+     content: "↗";
+     content: "class="attr(class);
+     /*不能添加 +*/
    }
-   .bottom-left, .bottom-right{
-     float: left;                /*浮动float 设置left向左浮动*/
-     width: 50%; height: 100%;
-     background-color: green;
+   #rootElement{
+     width: 100%; height: 50%;  /*根元素--初始包含块 */
+     /*position:relative;*/
+   }
+
+   .bottom{
+     /*position: relative; height: 100%;*/  /* 方案一：设置position：relative 那.bottom是.bottom-left -right的包含块  但.rootElement是.bottom的包含块 所以得设置高宽--为什么width不用设置？？--是block会width会自动占据父元素宽度 */
+      padding: 100px; height: 100%; /* 方案二：目前bottom不是根元素 不会默认形成初始包含块*/
+      background:pink;
+      margin: 10px 0 0;
+   }
+
+   .bottom-left{
+     /*float: left; */     /*浮动float 设置left向左浮动  --同时形成BFC*/
+     /*display:inline-block;*/   /*形成BFC blocking formatting context块级格式化上下文-就可以不被float-right所影响*/
+     position: absolute;    /*形成BFC 同时 position：absolute 但不存在position为非static的祖先元素 所以它是初始包含块了, height和width就和用户端有关  */
+     left:auto;         /* 若设置为 0 则以body的坐标系来设定  若设置auto 或 inherit 那位置还是会在父级元素后面*/
+     width: 50%; height: 100%;  /* height是body/html的height 的100% */
+     background-color: rgba(76,171,87,0.8);
+     border:5px solid red;
+     margin: 10px 0 0;
    }
    .bottom-right{
-     background: blue;
+     float: right; position: relative; /*浮动float  这个的包含块是bottom --同时形成BFC  --没有position:absolute或者fixed 所以bottom(块级、行内块、单元格)是.bottom-right包含块*/
+     top: 0; left: 0; bottom: 0;right: 0;
+     width: 50%; height: 100%;  /* height是bottom的height 的100% */
+     width: 350px; height: 100px;
+     background: rgba(32,151,243,0.8);
    }
   </style>
 </head>
 <body>
 
-  <div id = "top" class="top">
-  </div>
-  <div id = "bottom" class="bottom">
-    <div id = "bottom-left" class="bottom-left"></div>
-    <div id = "bottom-right" class="bottom-right"></div>
+  <div id = "top" class="top"><h1>hello world</h1></div>
+  <div id = "rootElement" class="根元素">
+    <div id = "bottom" class="bottom">
+      <div id = "bottom-left" class="bottom-left"></div>
+      <div id = "bottom-right" class="bottom-right"></div>
+    </div>
   </div>
   <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script>
   <script>
