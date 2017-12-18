@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>"全屏品字"</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <style>
+   html{
+     margin: 0px;
+     /* padding:30px; */
+     border: 3px solid red;
+     height:100%;
+     /* ?这个height百分比是 以哪个高度来计算的？ */
+   }
+   body{
+     border: 3px solid blue;
+     height: 100%;
+     margin: 0px;
+     /*默认body高度为0，所以需要设置高度为100%*/
+
+     /* ?这个height百分比是 以哪个高度来计算的？ */
+   }
+
+
+   .top{
+     /*position是absolute，祖先元素没有position是非static(relative或absolute)的，所以是初始包含块，视口是窗口,width50%按照窗口代销来计算*/
+     /* left若是默认按照 普通文档流来定位，若是设定具体值 按照视口（画布）坐标系来定位--BFC &初始包含块*/
+     position:absolute; left:0;top:0;bottom:0;right: auto; margin:auto;
+     width: 50%; height:100%;
+     background-color:rgba(150,200,100,0.8);
+   }
+
+  </style>
+</head>
+<body>
+
+  <div id = "top" class="top"></div>
+
+  <!-- <script type="text/javascript" src="js/lib/jquery/dist/jquery.min.js"></script> -->
+
+
+</body>
+<script>
+let body = document.body;
+// let html =document.html;
+// console.log(`html的height：${window.body.height}`);
+console.log(`屏幕高度:${screen.height};屏幕可用高度:${screen.availHeight};任务栏高度（屏幕高度-屏幕可用高度）:${screen.height-screen.availHeight}`);
+console.log(`浏览器高度:${window.outerHeight};页面可用高度:${window.innerHeight};工具栏高度（浏览器高度-页面可用高度）:${window.outerHeight-window.innerHeight}`);
+console.log(`body展示高度:${body.clientHeight};body总高度:${body.offsetHeight};下方滚动条高度（页面可用高度-body展示高度）:${window.innerHeight-body.clientHeight}`);
+</script>
+</html>
